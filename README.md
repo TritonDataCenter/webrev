@@ -9,17 +9,10 @@ This version works on OS X and illumos-based systems.
 
 ## Usage
 
-This version of webrev has a few limitations:
-
-* You must be connected to your upstream (i.e., it won't work offline unless
-  your upstream is local).
-* Your changes must be committed.
-* Your git repo must be up-to-date (i.e., a "git push -n" must not fail
-  because the upstream HEAD for your branch has changed).
-
-To use it, just run "webrev" from inside your repo.  It will figure out what's
-changed from upstream and generate a directory called "webrev" with an
-index.html that's a completely offline code review browser.
+First, make sure all of your changes are committed (more than one commit is
+okay).  Then just run "webrev" from inside your repo.  It will figure out what's
+changed and generate a directory called "webrev" with an index.html that's a
+completely offline code review browser.
 
 For example, here are some changes:
 
