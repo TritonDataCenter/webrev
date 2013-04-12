@@ -54,3 +54,9 @@ and open the generated index.html:
 
 The HTML files in the webrev directory use only relative links, so you can move
 the directory around wherever you want.
+
+
+## Advanced options
+
+You can use "-p" to specify the parent (upstream) to compare against.  This can
+be a git URL or just a regular git expression, as in "webrev -p HEAD^^^^^".
