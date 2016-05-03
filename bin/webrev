@@ -1,4 +1,4 @@
-#!/usr/bin/ksh93 -p
+#!/bin/ksh -p
 #
 # CDDL HEADER START
 #
@@ -23,7 +23,6 @@
 #
 # Copyright (c) 2002, 2010, Oracle and/or its affiliates. All rights reserved.
 # Copyright 2008, 2010, Richard Lowe
-# Copyright 2012 Marcel Telka <marcel@telka.sk>
 # Copyright 2014 Bart Coddens <bart.coddens@gmail.com>
 # Copyright 2016 Nexenta Systems, Inc.
 # Copyright 2016 Joyent, Inc.
@@ -2170,7 +2169,7 @@ trap "rm -f /tmp/$$.* ; exit" 0 1 2 3 15
 
 set +o noclobber
 
-PATH=$(/bin/dirname "$(whence $0)"):$PATH
+PATH=$(dirname "$(whence $0)"):$PATH
 
 [[ -z $WDIFF ]] && WDIFF=`look_for_prog wdiff`
 [[ -z $WX ]] && WX=`look_for_prog wx`
@@ -2615,7 +2614,7 @@ elif [[ $SCM_MODE == "git" ]]; then
 
 	# Try to figure out the parent based on the branch the current
 	# branch is tracking, if we fail, use origin/master
-	this_branch=$($GIT branch | nawk '$1 == "*" { print $2 }')
+	this_branch=$($GIT branch | $AWK '$1 == "*" { print $2 }')
 	par_branch="origin/master"
 
 	# If we're not on a branch there's nothing we can do
@@ -2767,7 +2766,7 @@ typeset -A itsinfo
 typeset -r its_sed_script=/tmp/$$.its_sed
 valid_prefixes=
 if [[ -z $nflag ]]; then
-	DEFREGFILE="$(/bin/dirname "$(whence $0)")/../etc/its.reg"
+	DEFREGFILE="$(dirname "$(whence $0)")/../etc/its.reg"
 	if [[ -n $Iflag ]]; then
 		REGFILE=$ITSREG
 	elif [[ -r $HOME/.its.reg ]]; then
@@ -2796,7 +2795,7 @@ if [[ -z $nflag ]]; then
 	done
 
 
-	DEFCONFFILE="$(/bin/dirname "$(whence $0)")/../etc/its.conf"
+	DEFCONFFILE="$(dirname "$(whence $0)")/../etc/its.conf"
 	CONFFILES=$DEFCONFFILE
 	if [[ -r $HOME/.its.conf ]]; then
 		CONFFILES="${CONFFILES} $HOME/.its.conf"
@@ -3390,7 +3389,7 @@ if [[ -z "$preparer" ]]; then
 	')
 fi
 
-PREPDATE=$(LC_ALL=C /usr/bin/date +%Y-%b-%d\ %R\ %z\ %Z)
+PREPDATE=$(LC_ALL=C date +%Y-%b-%d\ %R\ %z\ %Z)
 print "<tr><th>Prepared by:</th><td>$preparer on $PREPDATE</td></tr>"
 print "<tr><th>Workspace:</th><td>${PRETTY_CWS:-$CWS}"
 print "</td></tr>"
